@@ -1,37 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body style="background-color: #16325B;">
-    <div class="container mt-5">
-        <h2 class="mb-4" style="color: #FFDC7F">Submit your lending details</h2>
+{% extends "base.html" %}
+
+{% block title %}
+    Submit Your Lending Details
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2 class="mb-4">Submit your lending details</h2>
+
+        <!-- Display the balances -->
+        <div class="mb-3">
+            {% for token, value in balances.items() %}
+                <div id="balance-{{ token }}">Balance for {{ token }}: {{ value }}</div>
+            {% endfor %}
+        </div>
+
+        <form action="/submit" method="post" onsubmit="return validateAmount()">
+            <!-- Token Selection Field -->
             <div class="mb-3">
-                {% for token, value in balances.items() %}
-                    <div id="balance-{{ token }}" style="color: #FFDC7F">Balance for {{ token }}: {{ value }}</div>
-                {% endfor %}
-            </div>
-        <form action="/submit" method="post">
-            <!-- Token Amount Field -->
-            <div class="mb-3">
-                <label for="token" class="form-label" style="color: #FFDC7F">Token Amount</label>
-                <select class="form-select" id="token" name="token" required style="background-color: #78B7D0">
-                    <option selected disabled>Select Token Amount</option>
-                    <option value="10">10 Tokens</option>
-                    <option value="20">20 Tokens</option>
-                    <option value="50">50 Tokens</option>
-                    <option value="100">100 Tokens</option>
+                <label for="token" class="form-label">Select Token</label>
+                <select class="form-select" id="token" name="token" onchange="updateMaxBalance()" required>
+                    <option selected disabled>Select Token</option>
+                    {% for token in balances.keys() %}
+                        <option value="{{ token }}">{{ token }}</option>
+                    {% endfor %}
                 </select>
+            </div>
+
+            <!-- Token Amount Field (Input) -->
+            <div class="mb-3">
+                <label for="amount" class="form-label">Token Amount</label>
+                <input type="number" id="amount" name="amount" class="form-control" min="0" step="any" placeholder="Enter token amount" required>
+                <div id="balance-warning" style="color: red; display: none;">Amount exceeds available balance.</div>
             </div>
 
             <!-- Lending Protocol Field -->
             <div class="mb-3">
-                <label for="protocol" class="form-label" style="color: #FFDC7F">Lending Protocol</label>
-                <select class="form-select" id="protocol" name="protocol" required style="background-color: #78B7D0">
+                <label for="protocol" class="form-label">Lending Protocol</label>
+                <select class="form-select" id="protocol" name="protocol" required>
                     <option selected disabled>Select Lending Protocol</option>
                     <option value="zkLend">zkLend</option>
                     <option value="Nostra">Nostra</option>
@@ -40,8 +46,8 @@
 
             <!-- Multiplier Field -->
             <div class="mb-3">
-                <label for="multiplier" class="form-label" style="color: #FFDC7F">Multiplier</label>
-                <select class="form-select" id="multiplier" name="multiplier" required style="background-color: #78B7D0">
+                <label for="multiplier" class="form-label">Multiplier</label>
+                <select class="form-select" id="multiplier" name="multiplier" required>
                     <option selected disabled>Select Multiplier</option>
                     <option value="2">2x</option>
                     <option value="3">3x</option>
@@ -51,11 +57,37 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-submit">Submit</button>
         </form>
     </div>
 
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <script>
+        const balances = {
+            {% for token, value in balances.items() %}
+                "{{ token }}": {{ value }},
+            {% endfor %}
+        };
+
+        // Function to update max balance for the selected token
+        function updateMaxBalance() {
+            const selectedToken = document.getElementById('token').value;
+            const maxBalance = balances[selectedToken] || 0;
+            document.getElementById('amount').setAttribute('max', maxBalance);
+        }
+
+        // Function to validate if entered amount is less than or equal to the token balance
+        function validateAmount() {
+            const selectedToken = document.getElementById('token').value;
+            const enteredAmount = parseFloat(document.getElementById('amount').value);
+            const maxBalance = balances[selectedToken] || 0;
+
+            if (enteredAmount > maxBalance) {
+                document.getElementById('balance-warning').style.display = 'block';
+                return false;
+            } else {
+                document.getElementById('balance-warning').style.display = 'none';
+                return true;
+            }
+        }
+    </script>
+{% endblock %}
