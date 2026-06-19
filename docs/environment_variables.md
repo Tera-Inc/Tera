@@ -25,6 +25,13 @@ will fail to start in production if any required variable is missing.
 | `ENV_VERSION`                | `PROD` enables production-only behaviour               |
 | `STELLAR_HORIZON_URL`        | Stellar Horizon endpoint                               |
 | `STELLAR_SOROBAN_RPC_URL`    | Soroban RPC endpoint                                   |
+| Variable                  | Purpose                                                     |
+|---------------------------|-------------------------------------------------------------|
+| `CORS_ORIGINS`            | Comma-separated allowed frontend origins                    |
+| `DB_PORT`                 | PostgreSQL port (default `5432`)                            |
+| `ENV_VERSION`             | `PROD` enables production-only behaviour                    |
+| `STELLAR_HORIZON_URL`     | Stellar Horizon endpoint                                    |
+| `STELLAR_SOROBAN_RPC_URL` | Soroban RPC endpoint                                        |
 
 ## Generating a session secret
 
@@ -40,3 +47,10 @@ require any of the variables above. Missing optional variables
 
 If `AIRDROP_REWARD_API_ENDPOINT` is unset, the airdrop fetcher acts
 as a no-op stub and returns no airdrop data.
+If `CORS_ORIGINS` is unset, the API allows requests from
+`http://localhost:3000` for local development. Set it explicitly in
+production, for example:
+
+```sh
+CORS_ORIGINS="https://quantara.xyz,https://app.quantara.xyz"
+```
