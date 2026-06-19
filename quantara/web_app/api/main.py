@@ -139,8 +139,8 @@ app.add_middleware(
 )
 # Rate limiting middleware -- must be added after CORS/session so it wraps the
 # full middleware stack and can reject requests before they reach routers.
-app.add_middleware(MaxBodySizeMiddleware, max_body_size=1024*1024)
 app.add_middleware(SlowAPIMiddleware)
+app.add_middleware(MaxBodySizeMiddleware, max_body_size=1024*1024)
 
 
 @app.get("/health", tags=["Health"], summary="Health check endpoint")

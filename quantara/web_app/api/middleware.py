@@ -63,7 +63,7 @@ class MaxBodySizeMiddleware:
             ]
         })
         await send({
-            "type": "http.body",
+            "type": "http.response.body",
             "body": json.dumps({"detail": "Request payload too large"}).encode("utf-8"),
             "more_body": False
         })
