@@ -36,7 +36,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
-    "format": "prettier --check . --write"
+    "format": "prettier --check . --write",
+    "e2e": "playwright test"
   },
   "options": {
     "allowedHosts": [
@@ -59,6 +60,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@vitest/ui": "^3.0.4",
     "class-variance-authority": "^0.7.1",
