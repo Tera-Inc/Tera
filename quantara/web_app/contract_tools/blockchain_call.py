@@ -15,6 +15,7 @@ from decimal import Decimal
 
 import aiohttp
 
+from .cache import get_cached_or_fetch
 from .constants import MULTIPLIER_POWER, TokenParams
 
 logger = logging.getLogger(__name__)
