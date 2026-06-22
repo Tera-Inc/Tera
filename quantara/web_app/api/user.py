@@ -232,8 +232,7 @@ async def get_user_contract_address(request: Request, wallet_id: str) -> GetUser
     tags=["User Operations"],
     summary="Get total opened amounts and number of unique users",
     response_model=GetStatsResponse,
-    response_description="Total amount for all open positions across all users & \
-                              Number of unique users in the database.",
+    response_description="Total amount for all open positions across all users & Number of unique users in the database.",
 )
 @limiter.limit(READ_LIMIT)
 async def get_stats(request: Request) -> GetStatsResponse:
@@ -257,7 +256,7 @@ async def get_stats(request: Request) -> GetStatsResponse:
         for token, amount in token_amounts.items():
             # Skip if no price available for the token
             if token not in current_prices:
-            logger.warning("no_price_data", token=token)
+                logger.warning("no_price_data", token=token)
                 continue
 
             # If the token is USDC, use it directly
