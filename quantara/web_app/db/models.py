@@ -5,6 +5,8 @@ table in the database and defines the structure and relationships
 between the data entities.
 """
 
+from web_app.db.database import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from enum import Enum as PyEnum
 from uuid import uuid4
@@ -24,7 +26,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 
-from web_app.db.database import Base
+
 
 
 class Status(PyEnum):
@@ -55,6 +57,9 @@ class User(Base):
     is_contract_deployed = Column(Boolean, default=False)
     wallet_id = Column(String, nullable=False, unique=True, index=True)
     contract_address = Column(String)
+    # Relationships
+    positions = relationship("Position", backref="user")
+    telegram_user = relationship("TelegramUser", backref="user", uselist=False)
 
 class Referal(Base):
     """

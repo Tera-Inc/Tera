@@ -8,6 +8,7 @@ from typing import TypeVar
 from sqlalchemy.exc import SQLAlchemyError
 
 from web_app.db.models import Base, Position, Status, TelegramUser, User
+from sqlalchemy.orm import joinedload
 
 from .base import DBConnector
 from web_app.utils.logger import get_logger
@@ -38,7 +39,7 @@ class UserDBConnector(DBConnector):
                         Position.status == Status.OPENED.value,
                         TelegramUser.is_allowed_notification == True,
                     )
-                    .distinct()
+                    .options(joinedload(User.positions), joinedload(User.telegram_user))
                     .all()
                 )
                 return results
