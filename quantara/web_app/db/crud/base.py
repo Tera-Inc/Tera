@@ -6,9 +6,10 @@ import logging
 import uuid
 from typing import Type, TypeVar
 
-from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import scoped_session, sessionmaker
+
+from web_app.db.database import get_database_url, init_engine
 
 from web_app.db.database import get_database_url
 from web_app.db.models import AirDrop, Base
@@ -32,11 +33,20 @@ class DBConnector:
     def __init__(self, db_url: str = None):
         """
         Initialize the database connection and session factory.
+
+        The engine is built via :func:`web_app.db.database.init_engine`
+        so every ``DBConnector`` instance inherits the same pool policy as
+        the module-level engine configured by ``web_app.db.database.init_db``
+        (configurable via ``DB_POOL_SIZE``, ``DB_MAX_OVERFLOW``,
+        ``DB_POOL_RECYCLE`` env vars with reasonable defaults and an
+        always-on ``pool_pre_ping``). When ``db_url`` is omitted, the
+        URL is derived from environment variables.
+
         :param db_url: Optional database URL. If not provided, fetches from environment.
         """
         if db_url is None:
             db_url = get_database_url()
-        self.engine = create_engine(db_url)
+        self.engine = init_engine(db_url)
         self.session_factory = sessionmaker(bind=self.engine)
         self.Session = scoped_session(self.session_factory)
 
