@@ -33,7 +33,7 @@ from web_app.api.referal import router as referal_router
 from web_app.api.wallet_auth import router as auth_router
 from web_app.api.metrics import router as metrics_router, PrometheusMiddleware
 from web_app.config_validator import assert_valid_config
-from web_app.api.middleware import MaxBodySizeMiddleware
+from web_app.api.middleware import MaxBodySizeMiddleware, SecurityHeadersMiddleware
 from web_app.db.database import init_db
 from web_app.db.database import init_db, get_database
 from web_app.utils.logger import configure_logging, get_logger
@@ -150,6 +150,7 @@ app.add_middleware(
 app.add_middleware(SlowAPIMiddleware)
 app.add_middleware(MaxBodySizeMiddleware, max_body_size=1024*1024)
 app.add_middleware(PrometheusMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
 
 
 @app.middleware("http")
