@@ -8,7 +8,7 @@
 
 ## Context
 
-Quantara must interact with two distinct categories of blockchain protocols on Stellar:
+Tera must interact with two distinct categories of blockchain protocols on Stellar:
 
 1. **Lending protocols** — for depositing collateral, borrowing assets, enabling/disabling collateral.
 2. **AMM/DEX protocols** — for swapping between assets (e.g., borrow USDC → swap to XLM → re-deposit).
@@ -20,7 +20,7 @@ Each category contains multiple protocols, and the set of available protocols ch
 - Prevent testing individual protocol interactions in isolation.
 - Create a monolithic dependency graph between the DeFi logic layer and external smart contracts.
 
-Additionally, the Rust Soroban contracts that will eventually execute the on-chain loop logic (`quantara/soroban/contracts/`) are not yet deployed. The adapter layer must allow the Python backend and JavaScript frontend to interact with protocols while the Rust contract layer is being developed.
+Additionally, the Rust Soroban contracts that will eventually execute the on-chain loop logic (`tera/soroban/contracts/`) are not yet deployed. The adapter layer must allow the Python backend and JavaScript frontend to interact with protocols while the Rust contract layer is being developed.
 
 ## Decision
 
@@ -29,7 +29,7 @@ Use the **Adapter pattern** (GoF) with abstract base classes (ABCs) and a **Fact
 ### Structure
 
 ```
-quantara/soroban/adapters/
+tera/soroban/adapters/
 ├── LendingAdapter.py       → ABC + LendingAdapterFactory
 ├── AMMAdapter.py           → ABC + AMMAdapterFactory
 └── CollateralManager.py    → Concrete class (not abstract)
@@ -119,4 +119,4 @@ Both adapters define immutable dataclasses (`ReserveData`, `UserPosition`, `Pool
 **Neutral:**
 
 - `CollateralManager` sits outside the adapter hierarchy — its concrete design reflects that collateral math is protocol-independent logic, not an integration seam.
-- The adapters are defined in `quantara/soroban/` but currently consumed only by the Python backend (API layer). The frontend invokes Soroban contracts directly via `@stellar/stellar-sdk` without going through these Python adapters — creating a dual-path architecture where the frontend and backend can use different protocol interfaces.
+- The adapters are defined in `tera/soroban/` but currently consumed only by the Python backend (API layer). The frontend invokes Soroban contracts directly via `@stellar/stellar-sdk` without going through these Python adapters — creating a dual-path architecture where the frontend and backend can use different protocol interfaces.

@@ -8,7 +8,7 @@
 
 ## Context
 
-The original Quantara prototype was built on Starknet using Cairo smart contracts. It integrated with Ekubo (AMM) and zkLend (lending protocol) on Starknet mainnet. The architecture included:
+The original Tera prototype was built on Starknet using Cairo smart contracts. It integrated with Ekubo (AMM) and zkLend (lending protocol) on Starknet mainnet. The architecture included:
 
 - A Cairo-based `loop_liquidity` contract handling leverage looping, position management, and reward claims.
 - Starknet-specific wallet integration (Argent X, Braavos).
@@ -23,7 +23,7 @@ Several factors drove the decision to reevaluate this foundation:
 
 ## Decision
 
-Abandon the Starknet/Cairo implementation and rebuild Quantara on Stellar/Soroban.
+Abandon the Starknet/Cairo implementation and rebuild Tera on Stellar/Soroban.
 
 The migration involved:
 
@@ -54,9 +54,9 @@ This means the backend communicates with Stellar via raw HTTP rather than the SD
 - Existing Cairo contract testing and deployment tooling (Starknet Foundry, Protostar) was discarded.
 - Backend cannot use `stellar_sdk.Server` due to its synchronous design; raw `aiohttp` calls must be maintained (see `contract_tools/blockchain_call.py`).
 - The frontend must own all Soroban transaction signing (build → simulate → assemble → sign → submit → poll), adding complexity to the client layer (`frontend/src/services/soroban.js`).
-- Legacy Starknet documentation in `docs/quantara.md`, `docs/contract_deploy.md`, and `research/manual_test_scenarios.md` must be clearly marked as deprecated to avoid confusion.
+- Legacy Starknet documentation in `docs/tera.md`, `docs/contract_deploy.md`, and `research/manual_test_scenarios.md` must be clearly marked as deprecated to avoid confusion.
 
 **Neutral:**
 
 - Rust smart contracts replace Cairo; both require WASM compilation but the toolchain differs (`stellar-cli` vs `starknet-foundry`).
-- The Soroban contract directory (`quantara/soroban/contracts/`) is planned but not yet populated; as of this writing only the adapter interfaces exist on disk.
+- The Soroban contract directory (`tera/soroban/contracts/`) is planned but not yet populated; as of this writing only the adapter interfaces exist on disk.

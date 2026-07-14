@@ -2,12 +2,12 @@
 
 ## Reporting a Vulnerability
 
-We take the security of Quantara seriously. If you discover a security vulnerability,
+We take the security of Tera seriously. If you discover a security vulnerability,
 please report it responsibly.
 
 **Do not** report security vulnerabilities through public GitHub issues.
 
-Instead, please email us at: **security@quantara.protocol**
+Instead, please email us at: **security@tera.protocol**
 
 You should receive a response within 48 hours. If you do not receive a response,
 please follow up to ensure we received your report.
@@ -22,7 +22,7 @@ We aim to:
 ## Scope
 
 This security policy covers:
-- The Quantara smart contracts (Soroban)
+- The Tera smart contracts (Soroban)
 - The backend API (FastAPI)
 - The frontend application (React)
 - The build and deployment pipeline

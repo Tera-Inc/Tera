@@ -8,7 +8,7 @@
 
 ## Context
 
-Quantara's backend serves API endpoints that depend on blockchain data:
+Tera's backend serves API endpoints that depend on blockchain data:
 
 - **Token balances and portfolio values** — fetched from Horizon REST API on every request (see `StellarClient.get_balance` and `fetch_portfolio` in `contract_tools/blockchain_call.py`).
 - **Reserve/position data** — fetched from Soroban RPC for lending protocol positions.
@@ -20,7 +20,7 @@ Without caching, every user request that touches blockchain data makes a synchro
 1. **Latency.** Each RPC round-trip adds 200–500 ms; a dashboard endpoint that aggregates 5–10 blockchain queries can take multiple seconds.
 2. **Rate limits.** Soroban RPC endpoints throttle requests; repeated cache-misses for the same data (e.g., the same reserve pool queried by 100 users simultaneously) waste有限的 rate-limit budget.
 
-Redis was already selected as a dependency (`redis = "5.2.0"` in `pyproject.toml`) for Celery broker functionality, and a Redis container is defined in `devops/docker-compose.quantara.yaml`. However, no application-level caching has been implemented — Redis is provisioned but unused by the application code.
+Redis was already selected as a dependency (`redis = "5.2.0"` in `pyproject.toml`) for Celery broker functionality, and a Redis container is defined in `devops/docker-compose.tera.yaml`. However, no application-level caching has been implemented — Redis is provisioned but unused by the application code.
 
 ## Decision
 

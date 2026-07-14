@@ -38,9 +38,9 @@ jobs:
             echo "Pulling latest changes..."
             git pull origin main
             echo "Rebuilding and restarting containers..."
-            docker compose -f devops/docker-compose.quantara.yaml up -d --build --remove-orphans
+            docker compose -f devops/docker-compose.tera.yaml up -d --build --remove-orphans
             echo "Applying database migrations..."
-            docker compose -f devops/docker-compose.quantara.yaml exec -T backend alembic -c web_app/alembic.ini upgrade head
+            docker compose -f devops/docker-compose.tera.yaml exec -T backend alembic -c web_app/alembic.ini upgrade head
             echo "Waiting for services to be healthy..."
             for i in $(seq 1 30); do
               if curl -sf http://localhost:8000/health > /dev/null 2>&1; then
@@ -50,7 +50,7 @@ jobs:
               sleep 2
             done
             echo "ERROR: Backend failed health check after 60s!"
-            docker compose -f devops/docker-compose.quantara.yaml logs --tail=50
+            docker compose -f devops/docker-compose.tera.yaml logs --tail=50
             exit 1
           DEPLOY
 

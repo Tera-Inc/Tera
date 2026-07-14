@@ -1,6 +1,6 @@
-# Contributing to Quantara
+# Contributing to Tera
 
-Thank you for your interest in contributing to Quantara! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to Tera! This document provides guidelines and instructions for contributing.
 
 ## Development Setup
 
@@ -24,8 +24,8 @@ Thank you for your interest in contributing to Quantara! This document provides 
 
 ## Testing
 
-- **Python backend**: `cd quantara && poetry run pytest web_app/tests`
-- **Frontend**: `cd quantara/frontend && yarn test`
+- **Python backend**: `cd tera && poetry run pytest web_app/tests`
+- **Frontend**: `cd tera/frontend && yarn test`
 
 ## Commit Messages
 

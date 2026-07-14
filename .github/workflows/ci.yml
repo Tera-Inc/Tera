@@ -9,16 +9,16 @@ on:
     branches:
       - main
     paths:
-      - 'quantara/web_app/**'
-      - 'quantara/frontend/**'
+      - 'tera/web_app/**'
+      - 'tera/frontend/**'
       - 'devops/**'
       - '.github/workflows/ci.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'quantara/web_app/**'
-      - 'quantara/frontend/**'
+      - 'tera/web_app/**'
+      - 'tera/frontend/**'
       - 'devops/**'
       - '.github/workflows/ci.yml'
 
@@ -32,7 +32,7 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: quantara
+          POSTGRES_DB: tera
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_HOST_AUTH_METHOD: trust
@@ -47,7 +47,7 @@ jobs:
     env:
       DB_HOST: localhost
       DB_PORT: 5432
-      DB_NAME: quantara
+      DB_NAME: tera
       DB_USER: postgres
       DB_PASSWORD: password
       STELLAR_HORIZON_URL: https://horizon-testnet.stellar.org
@@ -69,22 +69,22 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        working-directory: ./quantara
+        working-directory: ./tera
         run: |
           poetry config virtualenvs.create false
           poetry install --no-interaction --no-root
 
       - name: Run migration round-trip tests
-        working-directory: ./quantara
+        working-directory: ./tera
         run: |
           poetry run pytest web_app/tests/test_migrations.py -q
 
       - name: Run migrations
-        working-directory: ./quantara
+        working-directory: ./tera
         run: |
           poetry run alembic -c web_app/alembic.ini upgrade head
 
       - name: Run tests
-        working-directory: ./quantara
+        working-directory: ./tera
         run: |
           poetry run pytest web_app/tests -v --tb=short

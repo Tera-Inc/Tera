@@ -8,7 +8,7 @@
 
 ## Context
 
-The Quantara protocol has undergone significant architectural changes — migration from Starknet to Stellar, adoption of adapter patterns for blockchain integration, and selection of caching infrastructure — without any formal record of why these decisions were made. New contributors lack the context behind past decisions, creating risk that decisions will be unknowingly reversed or that onboarding will require excessive tribal knowledge transfer.
+The Tera protocol has undergone significant architectural changes — migration from Starknet to Stellar, adoption of adapter patterns for blockchain integration, and selection of caching infrastructure — without any formal record of why these decisions were made. New contributors lack the context behind past decisions, creating risk that decisions will be unknowingly reversed or that onboarding will require excessive tribal knowledge transfer.
 
 ## Decision
 

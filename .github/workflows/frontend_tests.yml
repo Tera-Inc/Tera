@@ -9,13 +9,13 @@ on:
     branches:
       - main
     paths:
-      - 'quantara/frontend/**'
+      - 'tera/frontend/**'
       - 'devops/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'quantara/frontend/**'
+      - 'tera/frontend/**'
       - 'devops/**'
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       contents: read
     defaults:
       run:
-        working-directory: ./quantara/frontend
+        working-directory: ./tera/frontend
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
@@ -35,7 +35,7 @@ jobs:
       with:
         node-version: '20'
         cache: 'yarn'
-        cache-dependency-path: quantara/frontend/yarn.lock
+        cache-dependency-path: tera/frontend/yarn.lock
 
     - name: Create .env file
       run: cp .env.dev .env
@@ -59,4 +59,4 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: frontend-bundle-size-report
-        path: quantara/frontend/bundle-size-report.json
+        path: tera/frontend/bundle-size-report.json

@@ -1,6 +1,6 @@
 # Environment Variables
 
-The QUANTARA web application reads configuration from environment
+The TERA web application reads configuration from environment
 variables. Missing critical values are validated at startup by
 `web_app.config_validator.assert_valid_config`; the application
 will fail to start in production if any required variable is missing.
@@ -84,5 +84,5 @@ If `CORS_ORIGINS` is unset, the API allows requests from
 production, for example:
 
 ```sh
-CORS_ORIGINS="https://quantara.xyz,https://app.quantara.xyz"
+CORS_ORIGINS="https://tera.xyz,https://app.tera.xyz"
 ```

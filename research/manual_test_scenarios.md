@@ -120,7 +120,7 @@
 
 1.  **GitHub Link:**
 
-    - Redirects to the general [github.com](https://github.com) instead of the Quantara repository.
+    - Redirects to the general [github.com](https://github.com) instead of the Tera repository.
 
 2.  **Overview Link:**
 

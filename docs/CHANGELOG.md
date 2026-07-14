@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the QUANTARA web application are documented
+All notable changes to the TERA web application are documented
 in this file. Dates are in YYYY-MM-DD format.
 
 ## 2026-06-12
@@ -23,7 +23,7 @@ in this file. Dates are in YYYY-MM-DD format.
 
 ### Added
 - **#32**: Added a `NotFound` page component and catch-all 404
-  route in `quantara/frontend/src/App.jsx`. Users navigating to
+  route in `tera/frontend/src/App.jsx`. Users navigating to
   an undefined path now see a friendly 404 message with a link
   back to the home page instead of a blank page.
 - **#34**: Added `web_app/config_validator.py` to validate required

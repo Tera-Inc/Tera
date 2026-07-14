@@ -17,7 +17,7 @@ def run(command, **kwargs):
 
 def main():
     repo_root = Path(__file__).resolve().parents[1]
-    app_dir = repo_root / "quantara"
+    app_dir = repo_root / "tera"
 
     export_command = [
         "poetry",

@@ -18,7 +18,7 @@
 ## Testing Done
 
 <!-- Describe what testing you performed.
-     Backend changes: run `make ci` (lint + tests) or, from the `quantara/` directory,
+     Backend changes: run `make ci` (lint + tests) or, from the `tera/` directory,
      `poetry run pytest web_app/tests -v --tb=short` for tests and `make lint` for lint.
      Frontend changes: run `make frontend-test` and `make frontend-lint`. -->
 
@@ -35,7 +35,7 @@
 ## Checklist
 
 - [ ] `make lint` passes (pylint on changed `.py` files)
-- [ ] `make test` passes (pytest in `quantara/web_app/tests/`)
+- [ ] `make test` passes (pytest in `tera/web_app/tests/`)
 - [ ] CI is green on this PR
 - [ ] Documentation updated (if applicable)
 - [ ] PR is linked to a related issue (`Closes #<n>`)

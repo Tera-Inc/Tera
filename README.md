@@ -1,16 +1,16 @@
-# Quantara
+# Tera
 
 > **A Stellar-native leveraged DeFi protocol enabling automated capital looping strategies to maximize yield efficiency.**
 
-[![CI Workflow](https://github.com/quantara-protocol/quantara/actions/workflows/ci.yml/badge.svg)](https://github.com/quantara-protocol/quantara/actions/workflows/ci.yml)
+[![CI Workflow](https://github.com/tera-protocol/tera/actions/workflows/ci.yml/badge.svg)](https://github.com/tera-protocol/tera/actions/workflows/ci.yml)
 
 ---
 
 ## Overview
 
-**Quantara** is a professional-grade DeFi protocol built for the **Stellar ecosystem** that allows users to amplify their asset positions through automated leverage looping. By depositing collateral into lending protocols, borrowing stablecoins, swapping through AMMs, and re-depositing, Quantara enables up to **~5x leverage** on supported assets.
+**Tera** is a professional-grade DeFi protocol built for the **Stellar ecosystem** that allows users to amplify their asset positions through automated leverage looping. By depositing collateral into lending protocols, borrowing stablecoins, swapping through AMMs, and re-depositing, Tera enables up to **~5x leverage** on supported assets.
 
-Built for the **Stellar ecosystem**, Quantara uses clean abstraction layers and modular architecture to maximize capital efficiency.
+Built for the **Stellar ecosystem**, Tera uses clean abstraction layers and modular architecture to maximize capital efficiency.
 
 ### Core Concepts
 
@@ -25,7 +25,7 @@ Built for the **Stellar ecosystem**, Quantara uses clean abstraction layers and 
 ## Architecture
 
 ```
-quantara/
+tera/
 ├── soroban/                  # Soroban smart contract layer (Stellar)
 │   ├── adapters/             # Blockchain abstraction interfaces
 │   │   ├── LendingAdapter    → Lending protocol abstraction
@@ -45,7 +45,7 @@ quantara/
 
 ### Smart Contract Abstraction
 
-Quantara uses an **adapter pattern** to abstract blockchain interactions:
+Tera uses an **adapter pattern** to abstract blockchain interactions:
 
 | Adapter | Purpose | Description |
 |---------|---------|-------------|
@@ -55,7 +55,7 @@ Quantara uses an **adapter pattern** to abstract blockchain interactions:
 
 ---
 
-## Why Quantara?
+## Why Tera?
 
 ### Problem
 
@@ -63,7 +63,7 @@ DeFi users lack access to **capital-efficient leverage tools** in the Stellar ec
 
 ### Solution
 
-Quantara provides an **automated leverage engine** that:
+Tera provides an **automated leverage engine** that:
 
 - **Maximizes capital efficiency** through intelligent looping
 - **Reduces complexity** with one-click leverage positions
@@ -85,7 +85,7 @@ Quantara provides an **automated leverage engine** that:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd quantara
+cd tera
 
 # Configure environment variables
 cp .env.example .env
@@ -98,7 +98,7 @@ make back
 ```
 
 ```markdown
-* 🚀 **[Production Deployment Guide](docs/deployment.md)** - Step-by-step instructions for deploying Quantara to production environments.
+* 🚀 **[Production Deployment Guide](docs/deployment.md)** - Step-by-step instructions for deploying Tera to production environments.
 
 ### Services
 
@@ -125,17 +125,17 @@ make back
 
 ```bash
 # Python backend tests
-cd quantara && poetry run pytest web_app/tests
+cd tera && poetry run pytest web_app/tests
 
 # Frontend tests
-cd quantara/frontend && yarn test
+cd tera/frontend && yarn test
 ```
 
 ### Database Migrations
 
 ```bash
 # Start services
-docker compose -f devops/docker-compose.quantara.dev.yaml up --build
+docker compose -f devops/docker-compose.tera.dev.yaml up --build
 
 # Run migrations
 docker exec backend_dev alembic -c web_app/alembic.ini upgrade head
@@ -147,7 +147,7 @@ docker exec backend_dev alembic -c web_app/alembic.ini revision --autogenerate -
 ### Adding Test Data
 
 ```bash
-docker compose -f devops/docker-compose.quantara.dev.yaml up --build
+docker compose -f devops/docker-compose.tera.dev.yaml up --build
 
 # Seed the database
 docker exec -ti backend_dev python -m web_app.db.seed_data

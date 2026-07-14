@@ -6,21 +6,21 @@ enabled: false
 updates:
   # Python / Poetry Dependencies
   - package-ecosystem: "pip"
-    directory: "/quantara"
+    directory: "/tera"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
 
   # React / Yarn Dependencies
   - package-ecosystem: "npm"
-    directory: "/quantara/frontend" # Updated to reflect nested structure
+    directory: "/tera/frontend" # Updated to reflect nested structure
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
 
   # Docker Dependencies
   - package-ecosystem: "docker"
-    directory: "/quantara"
+    directory: "/tera"
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 5
