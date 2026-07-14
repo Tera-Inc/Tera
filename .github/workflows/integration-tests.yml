@@ -9,16 +9,16 @@ on:
     branches:
       - main
     paths:
-      - 'tera/web_app/**'
-      - 'tera/frontend/**'
+      - 'Tera/web_app/**'
+      - 'Tera/frontend/**'
       - 'devops/**'
       - '.github/workflows/integration-tests.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'tera/web_app/**'
-      - 'tera/frontend/**'
+      - 'Tera/web_app/**'
+      - 'Tera/frontend/**'
       - 'devops/**'
       - '.github/workflows/integration-tests.yml'
 
@@ -69,17 +69,17 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        working-directory: ./tera
+        working-directory: ./Tera
         run: |
           poetry config virtualenvs.create false
           poetry install --no-interaction --no-root
 
       - name: Run migrations
-        working-directory: ./tera
+        working-directory: ./Tera
         run: |
           poetry run alembic -c web_app/alembic.ini upgrade head
 
       - name: Run Integration Tests
-        working-directory: ./tera
+        working-directory: ./Tera
         run: |
           poetry run pytest web_app/test_integration/ -v --tb=short

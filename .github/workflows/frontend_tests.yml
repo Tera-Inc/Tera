@@ -9,13 +9,13 @@ on:
     branches:
       - main
     paths:
-      - 'tera/frontend/**'
+      - 'Tera/frontend/**'
       - 'devops/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'tera/frontend/**'
+      - 'Tera/frontend/**'
       - 'devops/**'
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
       contents: read
     defaults:
       run:
-        working-directory: ./tera/frontend
+        working-directory: ./Tera/frontend
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
       with:
         node-version: '20'
         cache: 'yarn'
-        cache-dependency-path: tera/frontend/yarn.lock
+        cache-dependency-path: Tera/frontend/yarn.lock
 
     - name: Create .env file
       run: cp .env.dev .env
@@ -59,4 +59,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: frontend-bundle-size-report
-        path: tera/frontend/bundle-size-report.json
+        path: Tera/frontend/bundle-size-report.json
